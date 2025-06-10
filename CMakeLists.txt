@@ -22,8 +22,11 @@ include(CTest)
 
 enable_testing()
 
-add_executable(tests_dummy tests/test_dummy.cpp)
+add_executable(tests_unit
+    tests/test_dummy.cpp
+    tests/test_scalar.cpp
+)
 
-target_link_libraries(tests_dummy PRIVATE Catch2::Catch2WithMain miniad)
+target_link_libraries(tests_unit PRIVATE Catch2::Catch2WithMain miniad)
 
-add_test(NAME miniad_dummy COMMAND tests_dummy) 
+add_test(NAME miniad_unit COMMAND tests_unit) 
