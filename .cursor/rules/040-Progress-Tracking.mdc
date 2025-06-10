@@ -12,13 +12,14 @@ alwaysApply: false
 
 ### Progress-Log editing rules
 
-* **Never remove rows**; history must stay append-only.  
-* Keep the table columns: `Date (UTC) | Phase | Summary | Next action`.  
-* Use ISO 8601 date (`2025-06-09`).  
-* “Phase” is an integer 0–10; if a sub-step is necessary use suffix “a/b/c”.  
-* Verb-leading summary, ≤ 80 chars.  
-* Next action is always framed as an imperative, e.g. “Write failing test for operator+”.  
+* **Never remove rows**; history must stay append-only.
+* Keep the table columns: `Date (UTC) | Phase | Summary | Next action`.
+* Use ISO 8601 date (`2025-06-09`).
+* “Phase” is an integer 0-10; if a sub-step is necessary use suffix “a/b/c”.
+* Verb-leading summary, ≤ 80 chars.
+* Next action is always framed as an imperative, e.g. “Write failing test for operator+”.
 * After commit/tag, reflect that in the summary (`commit a1b2c3d`, `tag phase-2-done`).
+* After adding a failing test, run the build so the user can observe the failure output (first red bar). Capture and show the relevant compiler error snippet (≤20 lines).
 
 Example row **after finishing scalar dual number ops**:
 

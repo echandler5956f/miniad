@@ -13,18 +13,18 @@ alwaysApply: false
 
 ## C++ Style
 
-1. **Header format**  
-   - SPDX-identifier at the top.  
-   - `#pragma once` + comment banner.  
-2. **Naming**  
-   - Types = `PascalCase`, functions = `snake_case`, templates = `CamelCaseT`.  
-   - Suffix compile-time boolean trait templates with `_v`.  
-3. **Expression-template design**  
-   - Use **CRTP** for nodes; inherit from `expr_base<E>`.  
-   - Provide `.eval()` *and* implicit conversion operator for scalars.  
-4. **Modern language**  
-   - Default all ctors; delete implicit conversions.  
-   - Use concepts for dimension checks (`requires (Rows == Cols)` …).  
+1. **Header format**
+   - SPDX-identifier at the top.
+   - `#pragma once` + comment banner.
+2. **Naming**
+   - Types = `PascalCase`, functions = `snake_case`, templates = `CamelCaseT`.
+   - Suffix compile-time boolean trait templates with `_v`.
+3. **Expression-template design**
+   - Use **CRTP** for nodes; inherit from `expr_base<E>`.
+   - Provide `.eval()` *and* implicit conversion operator for scalars.
+4. **Modern language**
+   - Default all ctors; delete implicit conversions.
+   - Use concepts for dimension checks (`requires (Rows == Cols)` …).
 5. **Examples**
 
 ```cpp

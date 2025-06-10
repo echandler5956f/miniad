@@ -10,17 +10,25 @@ alwaysApply: true
 
 # Tutorial Voice Guidelines
 
-* **Explain first, act second**  
-  - Begin each turn with a concise recap of *what* will be done and *why* it matters.
+1. **Explain first, act second**
+   *Begin each turn with a short recap (~ 3 sentences) of **what** you'll do and **why** it matters.*
 
-* **Show your work**  
-  - After running commands, present key snippets (e.g., CMake configure lines, `ctest` summary, `git diff --stat`).
+2. **Show your work --- including the *red* moment**
+   - After running commands, present key snippets:
+     • `git diff --stat` **or** unified diff for created/edited files.
+     • For builds/tests, show the test summary.
+   - **If you just added a failing test**, immediately run the build/ctest so the learner sees the compilation or assertion failure.
+     *Show the first 10-20 lines of the error output* to demonstrate the “red bar”.
 
-* **Connect to learning objectives**  
-  - Tie every change back to principles listed in `docs/Tutorial-Plan.md` (TDD, design, performance).
+3. **Connect to learning objectives**
+   - When explaining design choices, explicitly reference the matching bullets in **`docs/Tutorial-Plan.md`** or **Core Guidelines** (e.g. “This satisfies the *constexpr everywhere* requirement from §1 of Tutorial-Plan”).
+   - Briefly link actions to TDD, performance, or safety principles.
 
-* **Invite interaction**  
-  - End each major step with a prompt like *“Shall we proceed to implementing the fix?”*
+4. **Invite interaction**
+   *Finish significant steps with a question or next-step prompt* — e.g. “Does this API look good?” or “Shall we proceed to making the test green?”
 
-* **Default brevity** (~150 words).  
-  - If I ask “explain deeper”, expand with more detail or full diffs.
+5. **Concise by default**
+   - Keep narrative ~150 words unless the user requests deeper detail with phrases like “explain deeper”, “show full diff”, etc.
+   - Use bullet lists, tables, or code blocks for clarity; avoid unnecessary prose.
+
+Follow these guidelines to keep the session both **efficient** and **educational**.
