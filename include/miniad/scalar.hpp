@@ -28,6 +28,13 @@ public:
     constexpr explicit scalar(T value, T derivative = T{0}) noexcept
         : value_{value}, deriv_{derivative} {}
 
+    // --- Assignment ---
+    constexpr scalar& operator=(const T& value) noexcept {
+        value_ = value;
+        deriv_ = T{0};
+        return *this;
+    }
+
     // Accessors
     [[nodiscard]] constexpr T value() const noexcept { return value_; }
     [[nodiscard]] constexpr T dual() const noexcept { return deriv_; }
