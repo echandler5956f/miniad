@@ -25,6 +25,7 @@ enable_testing()
 add_executable(tests_unit
     tests/test_dummy.cpp
     tests/test_scalar.cpp
+    tests/test_expr.cpp
 )
 
 target_link_libraries(tests_unit PRIVATE Catch2::Catch2WithMain miniad)
