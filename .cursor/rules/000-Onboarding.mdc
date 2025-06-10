@@ -10,6 +10,7 @@ alwaysApply: true
 
 ## Onboarding instructions (read at every conversation start)
 
+0. Follow the Tutorial Voice Guidelines (002-Tutorial-Voice.mdc).
 1. Open `docs/Tutorial-Plan.md`; treat it as the immutable source of truth for scope, phases and success criteria.  
 2. Open `docs/Progress-Log.md`; parse the **latest row** to discover the *current* phase and next action.  
    - If the file does not exist, create it from the template in §1.1 of this rule and set Phase 0 as pending.  

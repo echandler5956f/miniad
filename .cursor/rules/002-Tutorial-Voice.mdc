@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Require pedagogical narration for every assistant turn
+alwaysApply: true
+---
+
+# Tutorial Voice Guidelines
+
+* **Explain first, act second**  
+  - Begin each turn with a concise recap of *what* will be done and *why* it matters.
+
+* **Show your work**  
+  - After running commands, present key snippets (e.g., CMake configure lines, `ctest` summary, `git diff --stat`).
+
+* **Connect to learning objectives**  
+  - Tie every change back to principles listed in `docs/Tutorial-Plan.md` (TDD, design, performance).
+
+* **Invite interaction**  
+  - End each major step with a prompt like *“Shall we proceed to implementing the fix?”*
+
+* **Default brevity** (~150 words).  
+  - If I ask “explain deeper”, expand with more detail or full diffs.
