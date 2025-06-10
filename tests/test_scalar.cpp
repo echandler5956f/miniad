@@ -44,4 +44,13 @@ TEST_CASE("scalar dual arithmetic", "[scalar][forward]") {
         REQUIRE(exp_a.value() == Catch::Approx(std::exp(4.0)));
         REQUIRE(exp_a.dual() == Catch::Approx(std::exp(4.0)));
     }
+
+    SECTION("Edge cases") {
+        scalar<double> zero{0.0, 1.0}; // value=0, d_zero/dx = 1
+
+        // Test sqrt(0)
+        auto sqrt_zero = sqrt(zero);
+        REQUIRE(sqrt_zero.value() == Catch::Approx(0.0));
+        REQUIRE(std::isinf(sqrt_zero.dual()));
+    }
 } 
