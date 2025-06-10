@@ -4,6 +4,7 @@
 /// \brief Base class and operators for expression templates.
 
 #include <utility> // for std::forward
+#include <cmath>   // for std::sqrt, std::exp
 
 namespace miniad {
 
@@ -54,24 +55,24 @@ protected:
 struct add_op {
     template <typename T>
     static constexpr auto apply(const T& a, const T& b) noexcept {
-        return scalar<typename T::value_type>{a.value() + b.value(), a.dual() + b.dual()};
+        return scalar<typename T::value_type>(a.value() + b.value(), a.dual() + b.dual());
     }
 };
 
 struct sub_op {
     template <typename T>
     static constexpr auto apply(const T& a, const T& b) noexcept {
-        return scalar<typename T::value_type>{a.value() - b.value(), a.dual() - b.dual()};
+        return scalar<typename T::value_type>(a.value() - b.value(), a.dual() - b.dual());
     }
 };
 
 struct mul_op {
     template <typename T>
     static constexpr auto apply(const T& a, const T& b) noexcept {
-        return scalar<typename T::value_type>{
+        return scalar<typename T::value_type>(
             a.value() * b.value(),
             a.dual() * b.value() + a.value() * b.dual()
-        };
+        );
     }
 };
 
@@ -80,10 +81,10 @@ struct div_op {
     static constexpr auto apply(const T& a, const T& b) noexcept {
         using V = typename T::value_type;
         const auto inv_b_val = V{1} / b.value();
-        return scalar<V>{
+        return scalar<V>(
             a.value() * inv_b_val,
             (a.dual() * b.value() - a.value() * b.dual()) * inv_b_val * inv_b_val
-        };
+        );
     }
 };
 
@@ -130,6 +131,70 @@ template <typename E1, typename E2>
 template <typename E1, typename E2>
 [[nodiscard]] constexpr auto operator/(const expr_base<E1>& a, const expr_base<E2>& b) noexcept {
     return binary_expr<div_op, E1, E2>(a.self(), b.self());
+}
+
+
+// --- Unary Expression Policies ---
+
+struct neg_op {
+    template <typename T>
+    static constexpr auto apply(const T& a) noexcept {
+        return scalar<typename T::value_type>(-a.value(), -a.dual());
+    }
+};
+
+struct sqrt_op {
+    template <typename T>
+    static constexpr auto apply(const T& a) noexcept {
+        using V = typename T::value_type;
+        const auto val_sqrt = std::sqrt(a.value());
+        return scalar<V>(val_sqrt, V{0.5} * (V{1} / val_sqrt) * a.dual());
+    }
+};
+
+struct exp_op {
+    template <typename T>
+    static constexpr auto apply(const T& a) noexcept {
+        using V = typename T::value_type;
+        const auto val_exp = std::exp(a.value());
+        return scalar<V>(val_exp, val_exp * a.dual());
+    }
+};
+
+
+// --- Unary Expression Template ---
+
+template <typename Op, typename E>
+class unary_expr : public expr_base<unary_expr<Op, E>> {
+public:
+    using value_type = typename E::value_type;
+
+    constexpr explicit unary_expr(const E& operand) noexcept : operand_(operand) {}
+
+    [[nodiscard]] constexpr auto eval() const noexcept {
+        return Op::apply(operand_.eval());
+    }
+
+private:
+    const E& operand_;
+};
+
+
+// --- Unary Operator Overloads ---
+
+template <typename E>
+[[nodiscard]] constexpr auto operator-(const expr_base<E>& a) noexcept {
+    return unary_expr<neg_op, E>(a.self());
+}
+
+template <typename E>
+[[nodiscard]] constexpr auto sqrt(const expr_base<E>& a) noexcept {
+    return unary_expr<sqrt_op, E>(a.self());
+}
+
+template <typename E>
+[[nodiscard]] constexpr auto exp(const expr_base<E>& a) noexcept {
+    return unary_expr<exp_op, E>(a.self());
 }
 
 } // namespace miniad 
