@@ -11,3 +11,4 @@
 | 2025-06-10 | 2 | Introduced expr_base for CRTP-based expression templates (commit 575fe23) | Refactor scalar<T> to be an expression template |
 | 2025-06-10 | 2 | Refactored binary operators (+,-,*,/) into the expression template system (commit 7a32112) | Re-implement unary operators (negation, sqrt, exp) as expression templates |
 | 2025-06-10 | 2 | Completed Phase 2 with full ET system for unary and binary ops (commit 9358b8a) | Conclude Phase 2 and begin Phase 3 |
+| 2025-06-10 | 3 | Implemented matrix facade and element access (commit bb48fde) | Add matrix addition expression template |
