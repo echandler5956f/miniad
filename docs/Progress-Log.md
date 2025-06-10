@@ -9,3 +9,5 @@
 | 2025-06-10 | 1 | Implemented basic arithmetic, unary minus, sqrt, and exp for scalar<T> (commit 37079ad) | Add tests for edge cases (e.g., sqrt(0)) |
 | 2025-06-10 | 1 | Completed Phase 1 with edge-case tests for scalar<T> (commit 540f092) | Introduce Expression Templates and begin Phase 2 |
 | 2025-06-10 | 2 | Introduced expr_base for CRTP-based expression templates (commit 575fe23) | Refactor scalar<T> to be an expression template |
+| 2025-06-10 | 2 | Refactored binary operators (+,-,*,/) into the expression template system (commit 7a32112) | Re-implement unary operators (negation, sqrt, exp) as expression templates |
+| 2025-06-10 | 2 | Completed Phase 2 with full ET system for unary and binary ops (commit 9358b8a) | Conclude Phase 2 and begin Phase 3 |

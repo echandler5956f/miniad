@@ -2,7 +2,7 @@
 
 - [x] Phase 0: Bootstrap
 - [x] Phase 1: `scalar<T>`
-- [ ] Phase 2: Expression-template base
+- [x] Phase 2: Expression-template base
 - [ ] Phase 3: `matrix<R,C>` facade
 - [ ] Phase 4: Forward-mode AD through matrices
 - [ ] Phase 5: Reverse-mode tape engine
