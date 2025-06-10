@@ -1,16 +1,13 @@
-# miniad – Phase Checklist
-> Tick ☐ → ☑ when a phase is fully completed and tagged `phase-<N>-done`.
+# Phase Checklist
 
-| Phase | Description                         | Done |
-|------:|-------------------------------------|:----:|
-| 0 | Bootstrap, Catch2 wiring                | ☐ |
-| 1 | `scalar<T>` + dual number ops           | ☐ |
-| 2 | CRTP `expr_base` (ET)                   | ☐ |
-| 3 | Static-size `matrix<R,C>` façade        | ☐ |
-| 4 | Forward-mode AD through matrices        | ☐ |
-| 5 | Reverse-mode tape engine                | ☐ |
-| 6 | High-level ops (GEMM, det, inverse)     | ☐ |
-| 7 | Benchmarks vs Eigen                     | ☐ |
-| 8 | Tooling hardening (sanitizers, tidy)    | ☐ |
-| 9 | Packaging & docs                        | ☐ |
-| 10| Release workflow                        | ☐ |
+- [x] Phase 0: Bootstrap
+- [x] Phase 1: `scalar<T>`
+- [ ] Phase 2: Expression-template base
+- [ ] Phase 3: `matrix<R,C>` facade
+- [ ] Phase 4: Forward-mode AD through matrices
+- [ ] Phase 5: Reverse-mode tape engine
+- [ ] Phase 6: High-level ops
+- [ ] Phase 7: Benchmarks
+- [ ] Phase 8: Tooling hardening
+- [ ] Phase 9: Packaging & docs
+- [ ] Phase 10: Release workflow
