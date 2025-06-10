@@ -4,6 +4,7 @@
 /// \brief Dual number scalar<T> with forward-mode automatic differentiation.
 
 #include <type_traits>
+#include <cmath>
 
 namespace miniad {
 
@@ -78,9 +79,34 @@ public:
         return *this;
     }
 
+    // Unary negation ---------------------------------------------------------
+    constexpr scalar operator-() const noexcept {
+        return scalar{-value_, -deriv_};
+    }
+
 private:
     T value_{};
     T deriv_{};
 };
 
-} // namespace miniad 
+// Free functions for math operations --------------------------------------
+
+/// \brief Computes the square root of a scalar dual number.
+template <typename T>
+constexpr scalar<T> sqrt(const scalar<T>& s) noexcept {
+    const T val_sqrt = std::sqrt(s.value());
+    // d(sqrt(u))/dx = (1 / (2*sqrt(u))) * du/dx
+    const T deriv = T{0.5} * (T{1} / val_sqrt) * s.dual();
+    return scalar<T>{val_sqrt, deriv};
+}
+
+/// \brief Computes the exponential of a scalar dual number.
+template <typename T>
+constexpr scalar<T> exp(const scalar<T>& s) noexcept {
+    const T val_exp = std::exp(s.value());
+    // d(exp(u))/dx = exp(u) * du/dx
+    const T deriv = val_exp * s.dual();
+    return scalar<T>{val_exp, deriv};
+}
+
+} // namespace miniad

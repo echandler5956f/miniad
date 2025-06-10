@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_approx.hpp>
 #include <miniad/scalar.hpp>
+#include <cmath>
 
 using miniad::scalar;
 
@@ -24,5 +25,23 @@ TEST_CASE("scalar dual arithmetic", "[scalar][forward]") {
         REQUIRE((x - y).dual() == Catch::Approx(1.0));
         REQUIRE((x * y).dual() == Catch::Approx(4.0)); // d(x*y)/dx = y = 4
         REQUIRE((x / y).dual() == Catch::Approx(1.0 / 4.0)); // d(x/y)/dx = 1/y
+    }
+
+    SECTION("Math functions and unary negation") {
+        scalar<double> a{4.0, 1.0}; // value=4, da/dx=1
+
+        auto neg_a = -a;
+        REQUIRE(neg_a.value() == Catch::Approx(-4.0));
+        REQUIRE(neg_a.dual() == Catch::Approx(-1.0));
+
+        auto sqrt_a = sqrt(a); // sqrt(4) = 2
+        // d(sqrt(a))/dx = (1 / (2*sqrt(a))) * da/dx = (1 / (2*2)) * 1 = 0.25
+        REQUIRE(sqrt_a.value() == Catch::Approx(2.0));
+        REQUIRE(sqrt_a.dual() == Catch::Approx(0.25));
+
+        auto exp_a = exp(a); // exp(4)
+        // d(exp(a))/dx = exp(a) * da/dx = exp(4) * 1
+        REQUIRE(exp_a.value() == Catch::Approx(std::exp(4.0)));
+        REQUIRE(exp_a.dual() == Catch::Approx(std::exp(4.0)));
     }
 } 
