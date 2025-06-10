@@ -1,0 +1,22 @@
+---
+description: Step-by-step TDD workflow checklist for miniad
+globs: 
+alwaysApply: false
+---
+---
+description: Step-by-step TDD workflow checklist for miniad
+alwaysApply: false
+---
+
+# TDD Workflow (summon with @TDD-Workflow)
+
+1. **Define unit-level behaviour** in plain English (Given/When/Then).  
+2. **Create failing test** in `tests/` with appropriate tag.  
+3. **Run `ctest --output-on-failure`**; expect red.  
+4. **Implement minimal code** inside `include/miniad/` to satisfy test.  
+5. **Re-run build & tests**; expect green.  
+6. **Refactor**: remove duplication, improve names, ensure `constexpr` & `noexcept`.  
+7. **Static analysis**: run `make clang-tidy && make clang-format`.  
+8. **Repeat** for next feature or bug-fix.  
+
+*Use this checklist whenever you open a new feature branch.*

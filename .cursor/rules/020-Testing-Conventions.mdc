@@ -1,0 +1,33 @@
+---
+description: 
+globs: tests/**/*.cpp
+alwaysApply: false
+---
+---
+description: Unit-testing conventions for miniad using Catch2 v3
+globs:
+  - "tests/**/*.cpp"
+alwaysApply: false
+---
+
+### Testing Standards
+
+- **Framework**: Catch2 v3 single-header (fetched via CMake).  
+- **File naming**: `test_<unit>.cpp`.  
+- **Tagging**: `[scalar]`, `[matrix]`, `[ad][slow]` for expensive cases.  
+- **Red-Green-Refactor loop**  
+  1. Write a failing test (`REQUIRE(false)` placeholder if needed).  
+  2. Implement minimal code for green.  
+  3. Refactor with coverage > 90 %.  
+- **Compile flags**: tests compile with `-Wall -Wextra -Werror -fsanitize=undefined,address`.  
+- **Coverage gate**: fail build if `<90 %` lines in `include/miniad/` are uncovered.  
+- **Example**
+
+```cpp
+TEST_CASE("scalar dual arithmetic", "[scalar]") {
+  miniad::scalar<double> x = 3.0;
+  miniad::scalar<double> y = 4.0;
+  REQUIRE((x + y).value() == Approx(7.0));
+  REQUIRE((x + y).dual()  == Approx(1.0)); // derivative w.r.t. x when dx=1, dy=0
+}
+````

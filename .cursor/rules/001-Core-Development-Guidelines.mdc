@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Core development guidelines for the 'miniad' header-only C++20 AD+ET library
+alwaysApply: true
+---
+
+# miniad --- Core Guidelines
+
+- **C++ version**: Require **C++20** across all compilers.  
+- **Target layout**: keep public headers under `include/miniad/`; all files must compile standalone with `-pedantic` and `-fmodules-ts` if enabled.  
+- **Namespace**: expose only `miniad::*`; put internals under `miniad::detail::*`.  
+- **ODR safety**: every inline function must be `constexpr` where viable; avoid anonymous namespaces in headers.  
+- **Error handling**: prefer `[[nodiscard]] std::optional` over exceptions; mark noexcept where conceptually invariant.  
+- **Build**: one top-level `CMakeLists.txt` exporting an `INTERFACE` library target, fetched Catch2 via `FetchContent_MakeAvailable` (see Phase 0).  
+- **Documentation tags**: public APIs require `///` Doxygen comments.  
+- **References**  
+  - `.cursor/rules/rules.mdc` — rule schema definition (dependency)  
+  - `@README.md` — high-level project charter

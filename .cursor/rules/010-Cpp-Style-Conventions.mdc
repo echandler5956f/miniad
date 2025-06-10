@@ -1,0 +1,39 @@
+---
+description: 
+globs: include/miniad/**/*.hpp,src/**/*.cpp
+alwaysApply: false
+---
+---
+description: C++ style & API surface rules for miniad
+globs:
+  - "include/miniad/**/*.hpp"
+  - "src/**/*.cpp"
+alwaysApply: false
+---
+
+## C++ Style
+
+1. **Header format**  
+   - SPDX-identifier at the top.  
+   - `#pragma once` + comment banner.  
+2. **Naming**  
+   - Types = `PascalCase`, functions = `snake_case`, templates = `CamelCaseT`.  
+   - Suffix compile-time boolean trait templates with `_v`.  
+3. **Expression-template design**  
+   - Use **CRTP** for nodes; inherit from `expr_base<E>`.  
+   - Provide `.eval()` *and* implicit conversion operator for scalars.  
+4. **Modern language**  
+   - Default all ctors; delete implicit conversions.  
+   - Use concepts for dimension checks (`requires (Rows == Cols)` …).  
+5. **Examples**
+
+```cpp
+template<std::size_t R, std::size_t C, typename Derived>
+class matrix_base : public expr_base<Derived> {
+  static_assert(R > 0 && C > 0);
+public:
+  static constexpr std::size_t rows = R;
+  static constexpr std::size_t cols = C;
+  [[nodiscard]] constexpr auto operator()(std::size_t r, std::size_t c) const noexcept;
+};
+````

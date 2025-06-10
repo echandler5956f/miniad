@@ -1,0 +1,21 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Always-onboarding rule for miniad tutorial
+alwaysApply: true
+---
+
+## Onboarding instructions (read at every conversation start)
+
+1. Open `docs/Tutorial-Plan.md`; treat it as the immutable source of truth for scope, phases and success criteria.  
+2. Open `docs/Progress-Log.md`; parse the **latest row** to discover the *current* phase and next action.  
+   - If the file does not exist, create it from the template in §1.1 of this rule and set Phase 0 as pending.  
+3. Before making any change to project files, ensure an entry for *today* and *this phase* exists (append or update).  
+4. After a logical milestone (tests green, file scaffolded, etc.) **append/update** the log and tick the phase in `docs/Phase-Checklist.md`.  
+5. At the end of every assistant turn, if the log was modified, *stage & commit* with message `"progress: phase X --- <short summary>"`.  
+6. Use **git tags** `phase-0-done`, `phase-1-done`, … when a phase is fully complete.
+
+Fail human-readably if any of these steps cannot be completed (e.g., git unavailable).
